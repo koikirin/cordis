@@ -15,14 +15,16 @@
     "dep": "yarn yakumo upgrade",
     "pub": "yarn yakumo publish",
     "lint": "eslint --cache",
-    "test": "yarn yakumo mocha --import tsx",
+    "test": "yarn yakumo mocha -r esbuild-register -r yml-register",
     "test:text": "shx rm -rf coverage && c8 -r text yarn test",
     "test:json": "shx rm -rf coverage && c8 -r json yarn test",
     "test:html": "shx rm -rf coverage && c8 -r html yarn test"
   },
   "devDependencies": {
     "@cordisjs/eslint-config": "^1.1.1",
+    "@hieuzest/yakumo": "0.3.4",
     "@sinonjs/fake-timers": "^6.0.1",
+    "@types/mocha": "^9.1.1",
     "@types/node": "^22.1.0",
     "@types/sinonjs__fake-timers": "^6.0.4",
     "c8": "^7.14.0",

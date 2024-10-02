@@ -147,8 +147,7 @@ export abstract class EffectScope<C extends Context = Context> {
   }
 
   ensure(callback: () => Promise<void>) {
-    const task = Promise.resolve()
-      .then(callback)
+    const task = callback()
       .catch((reason) => {
         this.context.emit(this.ctx, 'internal/error', reason)
         this.cancel(reason)
@@ -198,7 +197,6 @@ export abstract class EffectScope<C extends Context = Context> {
   start() {
     if (!this.ready || this.isActive || this.uid === null) return true
     this.isActive = true
-    this.updateStatus(() => this.hasError = false)
   }
 
   accept(callback?: (config: C['config']) => void | boolean, options?: AcceptOptions): () => boolean

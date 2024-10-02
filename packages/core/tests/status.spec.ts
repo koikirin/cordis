@@ -24,7 +24,11 @@ describe('Status', () => {
     expect(error.mock.calls).to.have.length(1)
 
     fork.update({ foo: true })
+    await Promise.resolve()
+    await Promise.resolve()
     await checkError(root)
+    await Promise.resolve()
+    await Promise.resolve()
     expect(fork.status).to.equal(ScopeStatus.ACTIVE)
     expect(fork.runtime.status).to.equal(ScopeStatus.ACTIVE)
     expect(apply.mock.calls).to.have.length(1)
@@ -72,6 +76,9 @@ describe('Status', () => {
 
     const fork = root.plugin(apply)
     await root.lifecycle.flush()
+    await Promise.resolve()
+    await Promise.resolve()
+
     expect(fork.runtime.status).to.equal(ScopeStatus.FAILED)
     expect(fork.status).to.equal(ScopeStatus.ACTIVE)
     expect(apply.mock.calls).to.have.length(1)

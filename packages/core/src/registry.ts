@@ -1,6 +1,6 @@
 import { defineProperty, Dict } from 'cosmokit'
 import { Context } from './context.ts'
-import { ForkScope, MainScope } from './scope.ts'
+import { ForkScope, MainScope, ScopeStatus } from './scope.ts'
 import { resolveConfig, symbols, withProps } from './utils.ts'
 
 function isApplicable(object: Plugin) {
@@ -113,6 +113,7 @@ class Registry<C extends Context = Context> {
     const runtime = new MainScope(ctx, null!, config)
     ctx.scope = runtime
     runtime.ctx = ctx
+    runtime.status = ScopeStatus.ACTIVE
     this.set(null!, runtime)
   }
 
